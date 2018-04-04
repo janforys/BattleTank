@@ -76,3 +76,6 @@ DerivedDataCache/*
 
 # Starter Content
 Content/StarterContent/*
+
+# MyBuilds folder
+MyBuilds/*

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "TankAimingComponent.generated.h"
 
 // Forward Declaration
@@ -22,7 +23,9 @@ public:
 
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
-	void MoveBarrelTowards(FVector AimDirection);
+	// TODO: add SetTurretReference
+	
+	void AimAt(FVector HitLocation, float LaunchSpeed);
 
 protected:
 	// Called when the game starts
@@ -31,10 +34,11 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+		
 
 private:
-	UTankBarrel * Barrel = nullptr;
+	UTankBarrel* Barrel = nullptr;
+
+	void MoveBarrelTowards(FVector AimDirection);
 	
 };

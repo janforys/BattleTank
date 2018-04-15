@@ -1,14 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "BattleTank.h"
-#include "Tank.h"
 #include "TankPlayerController.h"
+#include "Tank.h"
+#include "BattleTank.h"
 
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
 	auto ControlledTank = GetControlledTank();
 	if (!ControlledTank)
 	{
@@ -49,6 +50,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & HitLocation) const
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
+
 	//De-project screen position of crosshair to 3D world direction
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
@@ -70,7 +72,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 		return true;
 	}
 	HitLocation = FVector(0);
-	return false;
+	return false;	/*Line trace didn't succeed*/
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const

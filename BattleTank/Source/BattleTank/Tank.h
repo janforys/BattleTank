@@ -41,7 +41,6 @@ protected:
 
 private:	
 	
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
@@ -52,4 +51,7 @@ private:
 		TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	UTankBarrel* Barrel = nullptr;
+
+	float ReloadedTimeInSeconds = 3;
+	double LastFireTime = 0;
 };

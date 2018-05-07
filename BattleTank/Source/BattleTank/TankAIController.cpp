@@ -5,6 +5,7 @@
 #include "Tank.h"
 #include "BattleTank.h"
 
+// Depends on movement component via pathfinding system
 
 void ATankAIController::BeginPlay()
 {
@@ -22,7 +23,7 @@ void ATankAIController::Tick(float DeltaTime)
 	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	auto ControlledTank = Cast<ATank>(GetPawn());
 
-	if (PlayerTank)
+	if (ensure(PlayerTank))
 	{
 		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 		ControlledTank->Fire();

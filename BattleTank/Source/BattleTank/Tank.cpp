@@ -5,7 +5,6 @@
 #include "TankTurret.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
-#include "TankMovementComponent.h"
 #include "TankAimingComponent.h"
 
 
@@ -27,15 +26,17 @@ void ATank::BeginPlay()
 void ATank::AimAt(FVector HitLocation)
 {
 
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
 {
+	if (!ensure(Barrel)) { return; }
+
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadedTimeInSeconds;	// Projectile launch delay
 
-	if (Barrel && isReloaded)
+	if(isReloaded)
 	{
 		// Spawn a projectile at the socket location of Barrel
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint,
